@@ -2,29 +2,31 @@ defmodule GracefulShutdownDemoWeb.Router do
   use GracefulShutdownDemoWeb, :router
 
   pipeline :browser do
-    plug :accepts, ["html"]
-    plug :fetch_session
-    plug :fetch_live_flash
-    plug :put_root_layout, html: {GracefulShutdownDemoWeb.Layouts, :root}
-    plug :protect_from_forgery
-    plug :put_secure_browser_headers
+    plug(:accepts, ["html"])
+    plug(:fetch_session)
+    plug(:fetch_live_flash)
+    plug(:put_root_layout, html: {GracefulShutdownDemoWeb.Layouts, :root})
+    plug(:protect_from_forgery)
+    plug(:put_secure_browser_headers)
   end
 
   pipeline :api do
-    plug :accepts, ["json"]
+    plug(:accepts, ["json"])
   end
 
   scope "/", GracefulShutdownDemoWeb do
-    pipe_through :browser
+    pipe_through(:browser)
 
-    get "/", PageController, :home
+    get("/", PageController, :home)
   end
 
   scope "/math/sum/:version", GracefulShutdownDemoWeb do
-    pipe_through :api
+    pipe_through(:api)
 
-    post "/", SlowMathController, :sum
+    post("/", SlowMathController, :sum)
   end
+
+  get("/health", GracefulShutdownDemoWeb.HealthController, :health)
 
   # Other scopes may use custom stacks.
   # scope "/api", GracefulShutdownDemoWeb do
@@ -41,10 +43,10 @@ defmodule GracefulShutdownDemoWeb.Router do
     import Phoenix.LiveDashboard.Router
 
     scope "/dev" do
-      pipe_through :browser
+      pipe_through(:browser)
 
-      live_dashboard "/dashboard", metrics: GracefulShutdownDemoWeb.Telemetry
-      forward "/mailbox", Plug.Swoosh.MailboxPreview
+      live_dashboard("/dashboard", metrics: GracefulShutdownDemoWeb.Telemetry)
+      forward("/mailbox", Plug.Swoosh.MailboxPreview)
     end
   end
 end
