@@ -20,6 +20,12 @@ defmodule GracefulShutdownDemoWeb.Router do
     get "/", PageController, :home
   end
 
+  scope "/math/sum/:version", GracefulShutdownDemoWeb do
+    pipe_through :api
+
+    post "/", SlowMathController, :sum
+  end
+
   # Other scopes may use custom stacks.
   # scope "/api", GracefulShutdownDemoWeb do
   #   pipe_through :api

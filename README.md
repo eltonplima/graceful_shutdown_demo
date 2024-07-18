@@ -1,5 +1,11 @@
 # GracefulShutdownDemo
 
+## Requests example
+
+```bash
+http POST http://localhost:4000/math/sum/1 <<<'{ "numbers": [1,2,3]}'
+```
+
 To start your Phoenix server:
 
   * Run `mix setup` to install and setup dependencies
