@@ -1,5 +1,7 @@
 # GracefulShutdownDemo
 
+This example was created based on this presentation: https://www.youtube.com/watch?v=cbCgB9F6RrM
+
 ## Requests example
 
 ```bash
