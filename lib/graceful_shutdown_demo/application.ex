@@ -10,14 +10,17 @@ defmodule GracefulShutdownDemo.Application do
     children = [
       GracefulShutdownDemoWeb.Telemetry,
       GracefulShutdownDemo.Repo,
-      {DNSCluster, query: Application.get_env(:graceful_shutdown_demo, :dns_cluster_query) || :ignore},
+      {DNSCluster,
+       query: Application.get_env(:graceful_shutdown_demo, :dns_cluster_query) || :ignore},
       {Phoenix.PubSub, name: GracefulShutdownDemo.PubSub},
       # Start the Finch HTTP client for sending emails
       {Finch, name: GracefulShutdownDemo.Finch},
       # Start a worker by calling: GracefulShutdownDemo.Worker.start_link(arg)
       # {GracefulShutdownDemo.Worker, arg},
       # Start to serve requests, typically the last entry
-      GracefulShutdownDemoWeb.Endpoint
+      GracefulShutdownDemoWeb.Endpoint,
+      GracefulShutdownDemo.Foo,
+      GracefulShutdownDemo.Bar
     ]
 
     # See https://hexdocs.pm/elixir/Supervisor.html
