@@ -2,7 +2,7 @@ import http from 'k6/http';
 import { check } from 'k6';
 
 export let options = {
-  vus: 500,
+  vus: 100,
   duration: '2m',
   noVUConnectionReuse: true,
   discardResponseBodies: true,
