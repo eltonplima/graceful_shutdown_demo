@@ -6,11 +6,11 @@ declare -r reg_name='kind-registry'
 declare -r reg_port='5001'
 
 function create_k8s_cluster() {
-  # create registry container unless it already exists
+  # 1. Create registry container unless it already exists
   if [ "$(docker inspect -f '{{.State.Running}}' "${reg_name}" 2>/dev/null || true)" != 'true' ]; then
     echo "Creating local registry"
     docker run \
-      -d --restart=always -p "127.0.0.1:${reg_port}:5000" --name "${reg_name}" \
+      -d --restart=always -p "127.0.0.1:${reg_port}:5000" --network bridge --name "${reg_name}" \
       registry:2
   fi
 
@@ -45,7 +45,7 @@ nodes:
 EOF
 }
 
-# https://kind.sigs.k8s.io/docs/user/local-registry/
+  # https://kind.sigs.k8s.io/docs/user/local-registry/
 function configure_local_registry() {
   # 3. Add the registry config to the nodes
   #
@@ -70,9 +70,9 @@ EOF
     docker network connect "kind" "${reg_name}"
   fi
 
-  # 5. Document the local registry
-  # https://github.com/kubernetes/enhancements/tree/master/keps/sig-cluster-lifecycle/generic/1755-communicating-a-local-registry
-  cat <<EOF | kubectl apply -f -
+# 5. Document the local registry
+# https://github.com/kubernetes/enhancements/tree/master/keps/sig-cluster-lifecycle/generic/1755-communicating-a-local-registry
+cat <<EOF | kubectl apply -f -
 apiVersion: v1
 kind: ConfigMap
 metadata:
@@ -123,15 +123,6 @@ function adjust_file_permissions() {
   chmod 600 ~/.kube/config
 }
 
-function install_helm() {
-  printf '=%.0s' {1..100} && echo ""
-  echo "Installing helm3"
-  printf '=%.0s' {1..100} && echo ""
-  curl https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3 | bash
-  helm repo add "kubernetes-dashboard" "https://kubernetes.github.io/dashboard/"
-  helm repo add "stable" "https://charts.helm.sh/stable" --force-update
-}
-
 function install_k8s_dashboard() {
   printf '=%.0s' {1..100} && echo ""
   echo "Installing k8s dashboard"
@@ -163,7 +154,6 @@ EOF
 create_k8s_cluster
 configure_local_registry
 adjust_file_permissions
-install_helm
 install_k8s_dashboard
 
 # install dashboard
