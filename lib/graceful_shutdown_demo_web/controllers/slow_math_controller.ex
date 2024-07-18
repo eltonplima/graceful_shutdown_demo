@@ -11,7 +11,7 @@ defmodule GracefulShutdownDemoWeb.SlowMathController do
 
   defp slow_sum("1", numbers) do
     Process.sleep(100)
-    Enum.sum(numbers)
+    {:ok, Enum.sum(numbers)}
   end
 
   defp slow_sum(_, _), do: {:error, :unsupported_version}
