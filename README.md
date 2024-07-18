@@ -14,8 +14,8 @@ http POST http://localhost:4000/math/sum/1 <<<'{ "numbers": [1,2,3]}'
 ./create-cluster.sh
 docker build -t localhost:5001/elixir-graceful-shutdown:latest . && docker push localhost:5001/elixir-graceful-shutdown
 # create a port forward to create the database and execute
-# psql -h localhost -p 5433 -U postgres -d postgres
-# create database calc; 
+# createdb calc -U postgres; 
+# psql -U postgres -d postgres -c 'ALTER SYSTEM SET max_connections = 500;'
 ```
 
 ## Configure LoadBalancer
@@ -30,10 +30,11 @@ curl "${LB_IP}":8000/health
 
 ## Issues
 
-If you start to receive this message:
+If you start to receive this message: cannot assign requested address
 
 You can use the following config: echo 1 > /proc/sys/net/ipv4/tcp_tw_reuse 
 
+- https://kind.sigs.k8s.io/docs/user/known-issues/#pod-errors-due-to-too-many-open-files
 
 
 To start your Phoenix server:
