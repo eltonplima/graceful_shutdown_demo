@@ -10,8 +10,29 @@ http POST http://localhost:4000/math/sum/1 <<<'{ "numbers": [1,2,3]}'
 
 ```bash
 ./create-cluster.sh
-docker build -t localhost:5001/elixir-graceful-shutdown:latest . && docker push localhost:5001/elixir-graceful-shutdown 
+docker build -t localhost:5001/elixir-graceful-shutdown:latest . && docker push localhost:5001/elixir-graceful-shutdown
+# create a port forward to create the database and execute
+# psql -h localhost -p 5433 -U postgres -d postgres
+# create database calc; 
 ```
+
+## Configure LoadBalancer
+```bash
+go install sigs.k8s.io/cloud-provider-kind@latest
+cloud-provider-kind
+# to discover the LB IP use
+LB_IP=$(kubectl get svc/calc -o=jsonpath='{.status.loadBalancer.ingress[0].ip}') 
+# to test the service
+curl "${LB_IP}":8000/health 
+```
+
+## Issues
+
+If you start to receive this message:
+
+You can use the following config: echo 1 > /proc/sys/net/ipv4/tcp_tw_reuse 
+
+
 
 To start your Phoenix server:
 
