@@ -9,7 +9,8 @@ import Config
 
 config :graceful_shutdown_demo,
   ecto_repos: [GracefulShutdownDemo.Repo],
-  generators: [timestamp_type: :utc_datetime]
+  generators: [timestamp_type: :utc_datetime],
+  pool_size: 10
 
 # Configures the endpoint
 config :graceful_shutdown_demo, GracefulShutdownDemoWeb.Endpoint,
