@@ -1,6 +1,7 @@
 # GracefulShutdownDemo
 
-This example was created based on this presentation: https://www.youtube.com/watch?v=cbCgB9F6RrM
+- [This example was created based on this presentation](https://www.youtube.com/watch?v=cbCgB9F6RrM)
+- [Elixir and k8s](https://dashbit.co/blog/kubernetes-and-the-erlang-vm-orchestration-on-the-large-and-the-small)
 
 ## Requests example
 
