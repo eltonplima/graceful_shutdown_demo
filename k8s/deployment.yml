@@ -1,0 +1,52 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: calc
+  labels:
+    app: calc
+spec:
+  replicas: 13
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 3
+      maxUnavailable: 0
+  selector:
+    matchLabels:
+      app: calc
+  template:
+    metadata:
+      labels:
+        app: calc
+    spec:
+      containers:
+        - name: calc
+          image: localhost:5001/calc:latest
+          ports:
+            - name: http
+              containerPort: 4000
+              protocol: TCP
+          env:
+            - name: INFLUXDB_BASE_URL
+              value: http://influxdb:8086
+            - name: DATABASE_URL
+              value: ecto://postgres:postgres@postgres:5432/calc
+            - name: SECRET_KEY_BASE
+              value: C8t75EWzcsaOMI3xipuvJGkvd1e0EM/57iWoSWwRkc/eEWmani8BfagSCfTu2ReM
+          livenessProbe:
+            exec:
+              command:
+                - /app/bin/calc
+                - pid
+            initialDelaySeconds: 10
+            periodSeconds: 5
+          readinessProbe:
+            httpGet:
+              path: /health
+              port: http
+            initialDelaySeconds: 20
+            periodSeconds: 5
+          lifecycle:
+            preStop:
+              exec:
+                command: ["sh", "-c", "sleep 5"]
