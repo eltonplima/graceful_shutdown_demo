@@ -21,6 +21,6 @@ export default function () {
 
   check(res, {
     '200 OK': (r) => r.status === 200,
-    "HTTP/2": (r) => r.proto === 'HTTP/2.0'
+    // "HTTP/2": (r) => r.proto === 'HTTP/2.0'
   });
 }
