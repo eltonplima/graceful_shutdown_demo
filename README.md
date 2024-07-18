@@ -6,6 +6,13 @@
 http POST http://localhost:4000/math/sum/1 <<<'{ "numbers": [1,2,3]}'
 ```
 
+## Create cluster steps
+
+```bash
+./create-cluster.sh
+docker build -t localhost:5001/elixir-graceful-shutdown:latest . && docker push localhost:5001/elixir-graceful-shutdown 
+```
+
 To start your Phoenix server:
 
   * Run `mix setup` to install and setup dependencies
