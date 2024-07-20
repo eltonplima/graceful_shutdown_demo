@@ -5,7 +5,7 @@ metadata:
   labels:
     app: calc
 spec:
-  replicas: 13
+  replicas: 2
   strategy:
     type: RollingUpdate
     rollingUpdate:
