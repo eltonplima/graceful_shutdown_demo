@@ -2,4 +2,4 @@
 set -eu
 
 cd -P -- "$(dirname -- "$0")"
-exec ./graceful_shutdown_demo eval GracefulShutdownDemo.Release.migrate
+exec ./calc eval Calc.Release.migrate

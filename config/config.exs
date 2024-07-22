@@ -7,20 +7,20 @@
 # General application configuration
 import Config
 
-config :graceful_shutdown_demo,
-  ecto_repos: [GracefulShutdownDemo.Repo],
+config :calc,
+  ecto_repos: [Calc.Repo],
   generators: [timestamp_type: :utc_datetime],
   pool_size: 10
 
 # Configures the endpoint
-config :graceful_shutdown_demo, GracefulShutdownDemoWeb.Endpoint,
+config :calc, CalcWeb.Endpoint,
   url: [host: "localhost"],
   adapter: Bandit.PhoenixAdapter,
   render_errors: [
-    formats: [html: GracefulShutdownDemoWeb.ErrorHTML, json: GracefulShutdownDemoWeb.ErrorJSON],
+    formats: [html: CalcWeb.ErrorHTML, json: CalcWeb.ErrorJSON],
     layout: false
   ],
-  pubsub_server: GracefulShutdownDemo.PubSub,
+  pubsub_server: Calc.PubSub,
   live_view: [signing_salt: "2dMYDLUq"]
 
 # Configures the mailer
@@ -30,12 +30,12 @@ config :graceful_shutdown_demo, GracefulShutdownDemoWeb.Endpoint,
 #
 # For production it's recommended to configure a different adapter
 # at the `config/runtime.exs`.
-config :graceful_shutdown_demo, GracefulShutdownDemo.Mailer, adapter: Swoosh.Adapters.Local
+config :calc, Calc.Mailer, adapter: Swoosh.Adapters.Local
 
 # Configure esbuild (the version is required)
 config :esbuild,
   version: "0.17.11",
-  graceful_shutdown_demo: [
+  calc: [
     args:
       ~w(js/app.js --bundle --target=es2017 --outdir=../priv/static/assets --external:/fonts/* --external:/images/*),
     cd: Path.expand("../assets", __DIR__),
@@ -45,7 +45,7 @@ config :esbuild,
 # Configure tailwind (the version is required)
 config :tailwind,
   version: "3.4.3",
-  graceful_shutdown_demo: [
+  calc: [
     args: ~w(
       --config=tailwind.config.js
       --input=css/app.css

@@ -1,11 +1,11 @@
 import Config
 
 # Configure your database
-config :graceful_shutdown_demo, GracefulShutdownDemo.Repo,
+config :calc, Calc.Repo,
   username: "postgres",
   password: "postgres",
   hostname: "localhost",
-  database: "graceful_shutdown_demo_dev",
+  database: "calc_dev",
   stacktrace: true,
   show_sensitive_data_on_connection_error: true,
   pool_size: 10
@@ -16,7 +16,7 @@ config :graceful_shutdown_demo, GracefulShutdownDemo.Repo,
 # The watchers configuration can be used to run external
 # watchers to your application. For example, we can use it
 # to bundle .js and .css sources.
-config :graceful_shutdown_demo, GracefulShutdownDemoWeb.Endpoint,
+config :calc, CalcWeb.Endpoint,
   # Binding to loopback ipv4 address prevents access from other machines.
   # Change to `ip: {0, 0, 0, 0}` to allow access from other machines.
   http: [ip: {127, 0, 0, 1}, port: 4000],
@@ -26,8 +26,8 @@ config :graceful_shutdown_demo, GracefulShutdownDemoWeb.Endpoint,
   secret_key_base: "NuYtM5TQykedsG+nW4jC47icHRwMnTRMCdFHfaUzIrywTxApJiSqkbsirCrLwWp4",
   watchers: [
     esbuild:
-      {Esbuild, :install_and_run, [:graceful_shutdown_demo, ~w(--sourcemap=inline --watch)]},
-    tailwind: {Tailwind, :install_and_run, [:graceful_shutdown_demo, ~w(--watch)]}
+      {Esbuild, :install_and_run, [:calc, ~w(--sourcemap=inline --watch)]},
+    tailwind: {Tailwind, :install_and_run, [:calc, ~w(--watch)]}
   ]
 
 # ## SSL Support
@@ -54,17 +54,17 @@ config :graceful_shutdown_demo, GracefulShutdownDemoWeb.Endpoint,
 # different ports.
 
 # Watch static and templates for browser reloading.
-config :graceful_shutdown_demo, GracefulShutdownDemoWeb.Endpoint,
+config :calc, CalcWeb.Endpoint,
   live_reload: [
     patterns: [
       ~r"priv/static/(?!uploads/).*(js|css|png|jpeg|jpg|gif|svg)$",
       ~r"priv/gettext/.*(po)$",
-      ~r"lib/graceful_shutdown_demo_web/(controllers|live|components)/.*(ex|heex)$"
+      ~r"lib/calc_web/(controllers|live|components)/.*(ex|heex)$"
     ]
   ]
 
 # Enable dev routes for dashboard and mailbox
-config :graceful_shutdown_demo, dev_routes: true
+config :calc, dev_routes: true
 
 # Do not include metadata nor timestamps in development logs
 config :logger, :console, format: "[$level] $message\n"
