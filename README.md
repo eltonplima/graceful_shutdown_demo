@@ -15,10 +15,12 @@ http POST http://localhost:4000/math/sum/1 <<<'{ "numbers": [1,2,3]}'
 
 ```bash
 ./create-cluster.sh
+kubectl apply -f k8s/01-postgres.yml
+kubectl apply -f k8s/01-influxdb.yml
+kubectl apply -f k8s/deployment.yml
 docker build -t localhost:5001/elixir-graceful-shutdown:latest . && docker push localhost:5001/elixir-graceful-shutdown
 # create a port forward to create the database and execute
-# createdb calc -U postgres; 
-# psql -U postgres -d postgres -c 'ALTER SYSTEM SET max_connections = 500;'
+# createdb graceful-shutdown-demo -U postgres
 ```
 
 ## Configure LoadBalancer
@@ -26,10 +28,14 @@ docker build -t localhost:5001/elixir-graceful-shutdown:latest . && docker push 
 go install sigs.k8s.io/cloud-provider-kind@latest
 cloud-provider-kind
 # to discover the LB IP use
-LB_IP=$(kubectl get svc/calc -o=jsonpath='{.status.loadBalancer.ingress[0].ip}') 
+LB_IP=$(kubectl get svc/graceful-shutdown-demo -o=jsonpath='{.status.loadBalancer.ingress[0].ip}') 
 # to test the service
 curl "${LB_IP}":8000/health 
 ```
+
+## Debugging DNS issues
+
+https://kubernetes.io/docs/tasks/administer-cluster/dns-debugging-resolution/
 
 ## Issues
 

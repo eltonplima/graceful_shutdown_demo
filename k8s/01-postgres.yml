@@ -22,6 +22,10 @@ spec:
           env:
             - name: POSTGRES_PASSWORD
               value: postgres
+#          lifecycle:
+#            postStart:
+#              exec:
+#                command: [ "/bin/sh", "-c", "createdb calc -U postgres" ]
 ---
 apiVersion: v1
 kind: Service
