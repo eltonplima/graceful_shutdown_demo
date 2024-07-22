@@ -1,5 +1,5 @@
-defmodule GracefulShutdownDemoWeb.PageControllerTest do
-  use GracefulShutdownDemoWeb.ConnCase
+defmodule CalcWeb.PageControllerTest do
+  use CalcWeb.ConnCase
 
   test "GET /", %{conn: conn} do
     conn = get(conn, ~p"/")

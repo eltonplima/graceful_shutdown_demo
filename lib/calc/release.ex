@@ -1,9 +1,9 @@
-defmodule GracefulShutdownDemo.Release do
+defmodule Calc.Release do
   @moduledoc """
   Used for executing DB release tasks when run in production without Mix
   installed.
   """
-  @app :graceful_shutdown_demo
+  @app :calc
 
   def migrate do
     load_app()

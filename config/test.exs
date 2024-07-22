@@ -5,23 +5,23 @@ import Config
 # The MIX_TEST_PARTITION environment variable can be used
 # to provide built-in test partitioning in CI environment.
 # Run `mix help test` for more information.
-config :graceful_shutdown_demo, GracefulShutdownDemo.Repo,
+config :calc, Calc.Repo,
   username: "postgres",
   password: "postgres",
   hostname: "localhost",
-  database: "graceful_shutdown_demo_test#{System.get_env("MIX_TEST_PARTITION")}",
+  database: "calc_test#{System.get_env("MIX_TEST_PARTITION")}",
   pool: Ecto.Adapters.SQL.Sandbox,
   pool_size: System.schedulers_online() * 2
 
 # We don't run a server during test. If one is required,
 # you can enable the server option below.
-config :graceful_shutdown_demo, GracefulShutdownDemoWeb.Endpoint,
+config :calc, CalcWeb.Endpoint,
   http: [ip: {127, 0, 0, 1}, port: 4002],
   secret_key_base: "zHQJikYGT1igulwSQb2uHGPDKttyDYeabNNc8z+rCBP13wy1iZfS2Y6SsY1/FPDH",
   server: false
 
 # In test we don't send emails
-config :graceful_shutdown_demo, GracefulShutdownDemo.Mailer, adapter: Swoosh.Adapters.Test
+config :calc, Calc.Mailer, adapter: Swoosh.Adapters.Test
 
 # Disable swoosh api client as it is only required for production adapters
 config :swoosh, :api_client, false
