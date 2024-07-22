@@ -2,6 +2,8 @@
 
 - [This example was created based on this presentation](https://www.youtube.com/watch?v=cbCgB9F6RrM)
 - [Elixir and k8s](https://dashbit.co/blog/kubernetes-and-the-erlang-vm-orchestration-on-the-large-and-the-small)
+- [Clustering Elixir](https://fly.io/docs/elixir/the-basics/clustering/)
+- [Clustering fly.io](https://fly.io/docs/elixir/advanced-guides/clustering-from-home-to-your-app-in-fly/)
 
 ## Requests example
 
