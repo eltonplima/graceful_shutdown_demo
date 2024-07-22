@@ -3,7 +3,7 @@ defmodule GracefulShutdownDemo.MixProject do
 
   def project do
     [
-      app: :graceful_shutdown_demo,
+      app: :calc,
       version: "0.1.0",
       elixir: "~> 1.14",
       elixirc_paths: elixirc_paths(Mix.env()),
@@ -19,7 +19,12 @@ defmodule GracefulShutdownDemo.MixProject do
   def application do
     [
       mod: {GracefulShutdownDemo.Application, []},
-      extra_applications: [:logger, :runtime_tools, :observer]
+      extra_applications:
+        if Mix.env() == :dev do
+          [:logger, :runtime_tools, :wx, :observer]
+        else
+          [:logger, :runtime_tools]
+        end
     ]
   end
 
@@ -58,7 +63,8 @@ defmodule GracefulShutdownDemo.MixProject do
       {:gettext, "~> 0.20"},
       {:jason, "~> 1.2"},
       {:dns_cluster, "~> 0.1.1"},
-      {:bandit, "~> 1.5"}
+      {:bandit, "~> 1.5"},
+      {:libcluster, "~> 3.3.3"}
     ]
   end
 
