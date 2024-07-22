@@ -1,1 +1,1 @@
-call "%~dp0\calc" eval GracefulShutdownDemo.Release.migrate
+call "%~dp0\calc" eval Calc.Release.migrate

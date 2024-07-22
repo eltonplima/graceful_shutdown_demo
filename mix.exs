@@ -1,4 +1,4 @@
-defmodule GracefulShutdownDemo.MixProject do
+defmodule Calc.MixProject do
   use Mix.Project
 
   def project do
@@ -18,7 +18,7 @@ defmodule GracefulShutdownDemo.MixProject do
   # Type `mix help compile.app` for more information.
   def application do
     [
-      mod: {GracefulShutdownDemo.Application, []},
+      mod: {Calc.Application, []},
       extra_applications:
         if Mix.env() == :dev do
           [:logger, :runtime_tools, :wx, :observer]
@@ -81,10 +81,10 @@ defmodule GracefulShutdownDemo.MixProject do
       "ecto.reset": ["ecto.drop", "ecto.setup"],
       test: ["ecto.create --quiet", "ecto.migrate --quiet", "test"],
       "assets.setup": ["tailwind.install --if-missing", "esbuild.install --if-missing"],
-      "assets.build": ["tailwind graceful_shutdown_demo", "esbuild graceful_shutdown_demo"],
+      "assets.build": ["tailwind calc", "esbuild calc"],
       "assets.deploy": [
-        "tailwind graceful_shutdown_demo --minify",
-        "esbuild graceful_shutdown_demo --minify",
+        "tailwind calc --minify",
+        "esbuild calc --minify",
         "phx.digest"
       ]
     ]

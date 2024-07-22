@@ -1,4 +1,4 @@
-defmodule GracefulShutdownDemo.Foo do
+defmodule Calc.Bar do
   use GenServer
   require Logger
 
@@ -8,15 +8,15 @@ defmodule GracefulShutdownDemo.Foo do
 
   @impl true
   def init([]) do
-    Process.flag(:trap_exit, true)
-    Logger.info("Foo starting...")
+    #    Process.flag(:trap_exit, true)
+    Logger.info("Bar starting...")
     {:ok, nil}
   end
 
   @impl true
   def terminate(reason, _state) do
-    Logger.info("Foo terminating with reason: #{inspect(reason)}")
-    Process.sleep(2000)
-    Logger.info("Foo terminated")
+    Logger.info("Bar terminating with reason: #{inspect(reason)}")
+    Process.sleep(7000)
+    Logger.info("Bar terminated")
   end
 end

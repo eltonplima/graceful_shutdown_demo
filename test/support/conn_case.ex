@@ -1,4 +1,4 @@
-defmodule GracefulShutdownDemoWeb.ConnCase do
+defmodule CalcWeb.ConnCase do
   @moduledoc """
   This module defines the test case to be used by
   tests that require setting up a connection.
@@ -11,7 +11,7 @@ defmodule GracefulShutdownDemoWeb.ConnCase do
   we enable the SQL sandbox, so changes done to the database
   are reverted at the end of every test. If you are using
   PostgreSQL, you can even run database tests asynchronously
-  by setting `use GracefulShutdownDemoWeb.ConnCase, async: true`, although
+  by setting `use CalcWeb.ConnCase, async: true`, although
   this option is not recommended for other databases.
   """
 
@@ -20,19 +20,19 @@ defmodule GracefulShutdownDemoWeb.ConnCase do
   using do
     quote do
       # The default endpoint for testing
-      @endpoint GracefulShutdownDemoWeb.Endpoint
+      @endpoint CalcWeb.Endpoint
 
-      use GracefulShutdownDemoWeb, :verified_routes
+      use CalcWeb, :verified_routes
 
       # Import conveniences for testing with connections
       import Plug.Conn
       import Phoenix.ConnTest
-      import GracefulShutdownDemoWeb.ConnCase
+      import CalcWeb.ConnCase
     end
   end
 
   setup tags do
-    GracefulShutdownDemo.DataCase.setup_sandbox(tags)
+    Calc.DataCase.setup_sandbox(tags)
     {:ok, conn: Phoenix.ConnTest.build_conn()}
   end
 end
