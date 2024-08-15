@@ -32,6 +32,8 @@ config :calc, CalcWeb.Endpoint,
 # at the `config/runtime.exs`.
 config :calc, Calc.Mailer, adapter: Swoosh.Adapters.Local
 
+config :calc, dev_routes: true
+
 # Configure esbuild (the version is required)
 config :esbuild,
   version: "0.17.11",
