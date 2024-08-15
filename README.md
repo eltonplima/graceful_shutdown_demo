@@ -28,7 +28,7 @@ docker build -t localhost:5001/elixir-graceful-shutdown:latest . && docker push 
 go install sigs.k8s.io/cloud-provider-kind@latest
 cloud-provider-kind
 # to discover the LB IP use
-LB_IP=$(kubectl get svc/graceful-shutdown-demo -o=jsonpath='{.status.loadBalancer.ingress[0].ip}') 
+LB_IP=$(kubectl get svc/calc-lb -o=jsonpath='{.status.loadBalancer.ingress[0].ip}') 
 # to test the service
 curl "${LB_IP}":8000/health 
 ```
