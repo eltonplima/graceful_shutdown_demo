@@ -10,8 +10,7 @@ defmodule Calc.Application do
     children = [
       CalcWeb.Telemetry,
       Calc.Repo,
-      {DNSCluster,
-       query: Application.get_env(:calc, :dns_cluster_query) || :ignore},
+      {DNSCluster, query: Application.get_env(:calc, :dns_cluster_query) || :ignore},
       {Phoenix.PubSub, name: Calc.PubSub},
       # Start the Finch HTTP client for sending emails
       {Finch, name: Calc.Finch},
@@ -34,6 +33,19 @@ defmodule Calc.Application do
   @impl true
   def config_change(changed, _new, removed) do
     CalcWeb.Endpoint.config_change(changed, removed)
+    :ok
+  end
+
+  @impl true
+  def prep_stop(state) do
+    dbg("Preparing to stop the application")
+    dbg(state)
+    :ok
+  end
+
+  @impl true
+  def stop(_state) do
+    Logger.info("Shutting down the application")
     :ok
   end
 end
