@@ -18,9 +18,9 @@ http POST http://localhost:4000/math/sum/1 <<<'{ "numbers": [1,2,3]}'
 kubectl apply -f k8s/01-postgres.yml
 kubectl apply -f k8s/01-influxdb.yml
 kubectl apply -f k8s/deployment.yml
-docker build -t localhost:5001/elixir-graceful-shutdown:latest . && docker push localhost:5001/elixir-graceful-shutdown
+docker build -t localhost:5001/calc:latest . && docker push localhost:5001/calc
 # create a port forward to create the database and execute
-# createdb graceful-shutdown-demo -U postgres
+# createdb calc -U postgres
 ```
 
 ## Configure LoadBalancer
