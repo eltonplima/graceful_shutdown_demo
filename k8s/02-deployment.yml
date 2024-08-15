@@ -26,6 +26,8 @@ spec:
             - name: http
               containerPort: 4000
               protocol: TCP
+            - containerPort: 4000
+            - containerPort: 4369
           env:
             - name: INFLUXDB_BASE_URL
               value: http://influxdb:8086
@@ -33,6 +35,14 @@ spec:
               value: ecto://postgres:postgres@postgres:5432/calc
             - name: SECRET_KEY_BASE
               value: C8t75EWzcsaOMI3xipuvJGkvd1e0EM/57iWoSWwRkc/eEWmani8BfagSCfTu2ReM
+            - name: NAMESPACE
+              valueFrom:
+               fieldRef:
+                 fieldPath: metadata.namespace
+            - name: POD_IP
+              valueFrom:
+               fieldRef:
+                 fieldPath: status.podIP
           livenessProbe:
             exec:
               command:
@@ -50,3 +60,7 @@ spec:
             preStop:
               exec:
                 command: ["sh", "-c", "sleep 5"]
+
+          securityContext:
+            allowPrivilegeEscalation: false
+          imagePullPolicy: Always

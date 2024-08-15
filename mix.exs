@@ -21,7 +21,7 @@ defmodule Calc.MixProject do
       mod: {Calc.Application, []},
       extra_applications:
         if Mix.env() == :dev do
-          [:logger, :runtime_tools, :wx, :observer]
+          [:logger, :runtime_tools, :wx, :observer, :os_mon ]
         else
           [:logger, :runtime_tools]
         end
@@ -43,7 +43,6 @@ defmodule Calc.MixProject do
       {:postgrex, ">= 0.0.0"},
       {:phoenix_html, "~> 4.1"},
       {:phoenix_live_reload, "~> 1.2", only: :dev},
-      # TODO bump on release to {:phoenix_live_view, "~> 1.0.0"},
       {:phoenix_live_view, "~> 1.0.0-rc.1", override: true},
       {:floki, ">= 0.30.0", only: :test},
       {:phoenix_live_dashboard, "~> 0.8.3"},
@@ -63,7 +62,9 @@ defmodule Calc.MixProject do
       {:gettext, "~> 0.20"},
       {:jason, "~> 1.2"},
       {:dns_cluster, "~> 0.1.1"},
-      {:bandit, "~> 1.5"}
+      {:bandit, "~> 1.5"},
+      {:libcluster, "~> 3.3.3"},
+      {:ecto_psql_extras, "~> 0.6"},
     ]
   end
 
