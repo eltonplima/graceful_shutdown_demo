@@ -21,9 +21,9 @@ defmodule Calc.MixProject do
       mod: {Calc.Application, []},
       extra_applications:
         if Mix.env() == :dev do
-          [:logger, :runtime_tools, :wx, :observer, :os_mon ]
+          [:logger, :runtime_tools, :wx, :observer, :os_mon]
         else
-          [:logger, :runtime_tools]
+          [:logger, :runtime_tools, :os_mon]
         end
     ]
   end
@@ -64,7 +64,7 @@ defmodule Calc.MixProject do
       {:dns_cluster, "~> 0.1.1"},
       {:bandit, "~> 1.5"},
       {:libcluster, "~> 3.3.3"},
-      {:ecto_psql_extras, "~> 0.6"},
+      {:ecto_psql_extras, "~> 0.6"}
     ]
   end
 
