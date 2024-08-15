@@ -37,6 +37,11 @@ curl "${LB_IP}":8000/health
 
 https://kubernetes.io/docs/tasks/administer-cluster/dns-debugging-resolution/
 
+## Build docker image
+```bash
+docker build -t localhost:5001/calc:latest . && docker push localhost:5001/calc:latest
+```
+
 ## Issues
 
 If you start to receive this message: cannot assign requested address
